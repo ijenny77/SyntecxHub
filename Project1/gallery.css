@@ -9,12 +9,11 @@
     --teal:#16b8a6;
     --sun:#ffc857;
     --shadow:rgba(255,111,94,.18);
-    --line:rgba(58,4643,.1)
+    --line:rgba(58,46,43,.1)
 }
 
 *{
     box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif
 }
 
 html,body{
@@ -23,7 +22,7 @@ html,body{
     background: var(--bg);
     color:var(--ink);
     font-family: 'Nunito',sans-serif;
-    -webkit-font-smoothing:antialised;
+    -webkit-font-smoothing:antialiased;
 }
 
 body{
@@ -103,14 +102,14 @@ header{
     font-family: 'Poppins',sans-serif;
 }
 
-nav.filter{
+nav.filters{
     display: flex;
     flex-wrap: wrap;
     gap:10px;
     margin-bottom: 44px;
 }
 
-na.filters button{
+nav.filters button{
     font-family: 'Poppins',sans-serif;
     background: var(--card);
     border:2px solid transparent;
@@ -124,7 +123,7 @@ na.filters button{
     box-shadow: 0 2px 8px var(--shadow);
 }
 
-nav.filter button:hover{
+nav.filters button:hover{
     color:var(--coral-deep);
     transform: translateY(-1px);
 }
@@ -150,11 +149,11 @@ figure{
     transition: transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s ease;
     opacity: 0;
     transform: translateY(14px);
-    animation:rised .6s ease forwards
+    animation:rise .6s ease forwards
 }
 
 @keyframes rise{
-    to {opacity:1;transform: :translateY(0);}
+    to {opacity:1;transform: translateY(0);}
 }
 
 figure:hover{
@@ -259,6 +258,13 @@ footer{
     font-size:0.82rem;
     color: var(--ink-soft);
     font-weight: 600;
+}
+
+@media (max-width: 560px) {
+    .wrap{padding:40px 18px 64px;}
+    header{align-items:flex-start;}
+    .meta{text-align:left;}
+    .grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:24px 18px;}
 }
 
 @media (prefers-reduced-motion: reduce) {
