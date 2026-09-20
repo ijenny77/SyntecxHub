@@ -323,6 +323,24 @@ select:focus-visible {
     font-size: 19px;
 }
 
+.quick-icon svg,
+.xp-earned svg,
+.timer-box svg,
+.recent-label svg,
+.btn svg,
+.back-btn svg,
+.badge-icon svg {
+    width: 18px;
+    height: 18px;
+    stroke-width: 2;
+    vertical-align: middle;
+}
+
+.quick-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
 .quick-value {
     font-size: 20px;
     font-weight: 800;
@@ -1288,9 +1306,18 @@ select:focus-visible {
 }
 
 .badge-icon {
-    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--text);
 
     margin-bottom: 7px;
+}
+
+.badge-icon svg {
+    width: 22px;
+    height: 22px;
 }
 
 .badge-name {

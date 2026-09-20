@@ -804,7 +804,7 @@ function renderQuizList() {
                 </span>
 
                 <button class="btn primary">
-                    Start Quiz →
+                    Start Quiz <i data-lucide="arrow-right" aria-hidden="true"></i>
                 </button>
             </div>
         `;
@@ -1890,28 +1890,28 @@ function renderAchievements() {
 
     const achievements = [
         {
-            icon: "🎯",
+            icon: "target",
             name: "First Quiz",
             unlocked:
                 appData.attempts >= 1
         },
 
         {
-            icon: "🔥",
+            icon: "flame",
             name: "5 Quizzes",
             unlocked:
                 appData.attempts >= 5
         },
 
         {
-            icon: "⚡",
+            icon: "zap",
             name: "100 XP",
             unlocked:
                 appData.xp >= 100
         },
 
         {
-            icon: "🏆",
+            icon: "trophy",
             name: "Perfect Score",
             unlocked:
                 appData.history.some(
@@ -1920,7 +1920,7 @@ function renderAchievements() {
         },
 
         {
-            icon: "📚",
+            icon: "book-open",
             name: "All Categories",
             unlocked:
                 getCategories().every(
@@ -1934,7 +1934,7 @@ function renderAchievements() {
         },
 
         {
-            icon: "🚀",
+            icon: "rocket",
             name: "Level 5",
             unlocked:
                 getLevel() >= 5
@@ -1955,7 +1955,7 @@ function renderAchievements() {
 
             badge.innerHTML = `
                 <div class="badge-icon">
-                    ${achievement.icon}
+                    <i data-lucide="${achievement.icon}" aria-hidden="true"></i>
                 </div>
 
                 <div class="badge-name">
@@ -1969,6 +1969,8 @@ function renderAchievements() {
 
         }
     );
+
+    lucide.createIcons();
 }
 
 
@@ -2051,6 +2053,8 @@ function init() {
     updateProfile();
 
     showPage("home");
+
+    lucide.createIcons();
 
 }
 
