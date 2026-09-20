@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>QuizApp</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="quiz.css">
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+<div class="brand">
+    <div class="brand-mark">Q</div>
+
+    <div>
+        <div class="brand-name">QuizApp</div>
+        <div class="brand-sub">Think · Choose · Grow</div>
+    </div>
+</div>
+
+<nav class="nav">
+
+    <button class="nav-item active" data-page="home">
+        <span class="ic">⌂</span>
+        <span class="label">Home</span>
+    </button>
+
+    <button class="nav-item" data-page="quizzes">
+        <span class="ic">▤</span>
+        <span class="label">Quizzes</span>
+    </button>
+
+    <button class="nav-item" data-page="progress">
+        <span class="ic">▥</span>
+        <span class="label">Progress</span>
+    </button>
+
+    <button class="nav-item" data-page="profile">
+        <span class="ic">◎</span>
+        <span class="label">Profile</span>
+    </button>
+
+</nav>
+
+<div class="sidebar-footer">
+    <p>
+        Small steps.<br>
+        Big progress.
+    </p>
+</div>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main">
+
+<!-- =========================
+     HOME PAGE
+========================= -->
+
+<section class="page active" id="page-home">
+
+<div id="home-landing">
+
+    <div class="page-header">
+        <h1>Welcome back </h1>
+        <p>Keep learning, keep practicing, and see how far you can go.</p>
+    </div>
+
+
+    <!-- QUICK STATS -->
+
+    <div class="quick-stats">
+
+        <div class="quick-stat">
+
+            <div class="quick-icon">🔥</div>
+
+            <div>
+                <div class="quick-value" id="home-streak">0</div>
+                <div class="quick-label">Day streak</div>
+            </div>
+
+        </div>
+
+
+        <div class="quick-stat">
+
+            <div class="quick-icon">⚡</div>
+
+            <div>
+                <div class="quick-value" id="home-xp">0</div>
+                <div class="quick-label">XP earned</div>
+            </div>
+
+        </div>
+
+
+        <div class="quick-stat">
+
+            <div class="quick-icon">🏆</div>
+
+            <div>
+                <div class="quick-value" id="home-level">1</div>
+                <div class="quick-label">Level</div>
+            </div>
+
+        </div>
+
+
+        <div class="quick-stat">
+
+            <div class="quick-icon">🎯</div>
+
+            <div>
+                <div class="quick-value" id="home-accuracy">0%</div>
+                <div class="quick-label">Accuracy</div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- DAILY CHALLENGE -->
+
+    <div class="daily-card">
+
+        <div>
+
+            <span class="daily-badge">DAILY CHALLENGE</span>
+
+            <h2 id="daily-title">
+                Ready for today's challenge?
+            </h2>
+
+            <p id="daily-description">
+                Complete today's quiz and earn extra XP.
+            </p>
+
+        </div>
+
+        <button class="btn primary" id="btn-daily">
+            Start Challenge →
+        </button>
+
+    </div>
+
+
+    <!-- HOME GRID -->
+
+    <div class="grid3">
+
+        <!-- CATEGORY -->
+
+        <div class="panel">
+
+            <h3>Choose a Category</h3>
+
+            <div id="cat-list"></div>
+
+        </div>
+
+
+        <!-- PROGRESS -->
+
+        <div class="panel">
+
+            <h3>Your Progress</h3>
+
+            <div class="stat-track">
+                <div
+                    class="stat-fill"
+                    id="home-stat-fill"
+                    style="width:0%;">
+                </div>
+            </div>
+
+
+            <div class="stat-numbers">
+
+                <div>
+                    <div class="num" id="home-correct">0</div>
+                    <div class="lbl">Correct</div>
+                </div>
+
+                <div>
+                    <div class="num" id="home-wrong">0</div>
+                    <div class="lbl">Wrong</div>
+                </div>
+
+                <div>
+                    <div class="num" id="home-skipped">0</div>
+                    <div class="lbl">Skipped</div>
+                </div>
+
+            </div>
+
+
+            <div class="recent-label">
+                ↻ Recent Activity
+            </div>
+
+            <div id="home-recent">
+
+                <div class="recent-sub">
+                    No quizzes completed yet.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- RECOMMENDED -->
+
+        <div class="panel">
+
+            <h3>Recommended For You</h3>
+
+            <p class="about-p">
+                Based on your recent performance.
+            </p>
+
+            <div id="recommended-list"></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</section>
+
+<!-- =========================
+     QUIZZES PAGE
+========================= -->
+
+<section
+    class="page"
+    id="page-quizzes">
+
+
+<div id="quizzes-content">
+
+<div class="page-header">
+
+    <h1>All Quizzes</h1>
+
+    <p>
+        Practice the technologies and concepts you're learning.
+    </p>
+
+</div>
+
+
+<div class="quiz-tools">
+
+    <input
+        type="text"
+        id="quiz-search"
+        class="search-input"
+        placeholder="Search quizzes...">
+
+
+    <select
+        id="difficulty-filter"
+        class="difficulty-filter">
+
+        <option value="all">
+            All difficulties
+        </option>
+
+        <option value="Easy">
+            Easy
+        </option>
+
+        <option value="Medium">
+            Medium
+        </option>
+
+        <option value="Hard">
+            Hard
+        </option>
+
+    </select>
+
+</div>
+
+
+<div
+    class="quiz-list"
+    id="quizzes-list">
+</div>
+
+</div>
+
+
+<!-- QUIZ RUNNER -->
+
+<div id="quiz-runner" style="display:none;">
+
+    <div class="quiz-topbar">
+
+        <button
+            class="back-btn"
+            id="btn-exit-quiz">
+            ←
+        </button>
+
+        <div class="quiz-title-center" id="runner-title">
+            Question 1 of 5
+        </div>
+
+        <div class="quiz-count-pill">
+
+            <span id="runner-answered">0</span>
+
+            /
+
+            <span id="runner-total">5</span>
+
+        </div>
+
+    </div>
+
+
+    <!-- TIMER -->
+
+    <div class="timer-box">
+
+        <span>⏱</span>
+
+        <span id="timer">
+            02:00
+        </span>
+
+    </div>
+
+
+    <div class="progress-track">
+
+        <div
+            class="progress-fill"
+            id="runner-progress"
+            style="width:20%;">
+        </div>
+
+    </div>
+
+
+    <!-- QUESTION -->
+
+    <div
+        class="card question-card"
+        id="question-card">
+
+        <div class="question-meta">
+
+            <span id="question-number">
+                Question 1
+            </span>
+
+            <span id="question-difficulty">
+                Hard
+            </span>
+
+        </div>
+
+
+        <h2 id="q-text">
+            Question text
+        </h2>
+
+
+        <div
+            class="options"
+            id="q-options">
+        </div>
+
+
+        <div class="qc-footer">
+
+            <button
+                class="btn"
+                id="btn-prev">
+                Previous
+            </button>
+
+            <button
+                class="btn"
+                id="btn-skip">
+                Skip
+            </button>
+
+            <button
+                class="btn primary"
+                id="btn-next">
+                Next →
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- RESULT -->
+
+    <div
+        class="card"
+        id="result-card"
+        style="display:none;">
+
+        <div class="result-wrap">
+
+            <div
+                class="result-ring"
+                id="result-ring">
+
+                <div class="result-ring-inner">
+
+                    <div
+                        class="pct"
+                        id="result-pct">
+                        0%
+                    </div>
+
+                    <div class="pct-lbl">
+                        SCORE
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <h2 id="result-title">
+                Quiz complete
+            </h2>
+
+            <p id="result-sub">
+                Here's how you did.
+            </p>
+
+
+            <div class="xp-earned">
+                ⚡ +<span id="result-xp">0</span> XP
+            </div>
+
+
+            <div class="result-stats">
+
+                <div>
+                    <div
+                        class="num"
+                        id="res-correct">
+                        0
+                    </div>
+
+                    <div class="lbl">
+                        Correct
+                    </div>
+                </div>
+
+
+                <div>
+                    <div
+                        class="num"
+                        id="res-wrong">
+                        0
+                    </div>
+
+                    <div class="lbl">
+                        Wrong
+                    </div>
+                </div>
+
+
+                <div>
+                    <div
+                        class="num"
+                        id="res-skipped">
+                        0
+                    </div>
+
+                    <div class="lbl">
+                        Skipped
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div
+                class="review-section"
+                id="review-section">
+
+                <h3>Review Answers</h3>
+
+                <div id="review-list"></div>
+
+            </div>
+
+
+            <div class="qc-footer">
+
+                <button
+                    class="btn"
+                    id="btn-back-home">
+                    Back to Home
+                </button>
+
+                <button
+                    class="btn primary"
+                    id="btn-retake">
+                    Retake Quiz
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</section>
+
+<!-- =========================
+     PROGRESS PAGE
+========================= -->
+
+<section
+    class="page"
+    id="page-progress">
+
+<div class="page-header">
+
+    <h1>Your Progress</h1>
+
+    <p>
+        Track your learning journey and identify areas to improve.
+    </p>
+
+</div>
+
+
+<div class="big-stats">
+
+    <div class="big-stat">
+
+        <div
+            class="num"
+            id="pg-attempts">
+            0
+        </div>
+
+        <div class="lbl">
+            Quizzes taken
+        </div>
+
+    </div>
+
+
+    <div class="big-stat">
+
+        <div
+            class="num"
+            id="pg-correct">
+            0
+        </div>
+
+        <div class="lbl">
+            Correct answers
+        </div>
+
+    </div>
+
+
+    <div class="big-stat">
+
+        <div
+            class="num"
+            id="pg-wrong">
+            0
+        </div>
+
+        <div class="lbl">
+            Wrong answers
+        </div>
+
+    </div>
+
+
+    <div class="big-stat">
+
+        <div
+            class="num"
+            id="pg-accuracy">
+            0%
+        </div>
+
+        <div class="lbl">
+            Accuracy
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- PERFORMANCE -->
+
+<div class="panel">
+
+    <div class="panel-heading">
+
+        <div>
+
+            <h3>
+                Category Performance
+            </h3>
+
+            <p class="panel-sub">
+                See which subjects you are practicing most.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div id="category-performance"></div>
+
+</div>
+
+
+<!-- HISTORY -->
+
+<div class="panel">
+
+    <div class="panel-heading">
+
+        <h3>
+            History
+        </h3>
+
+        <button
+            class="btn danger"
+            id="btn-clear-history">
+            Clear History
+        </button>
+
+    </div>
+
+
+    <div id="pg-history">
+
+        <div class="recent-sub">
+            No quizzes completed yet — finish one to see it here.
+        </div>
+
+    </div>
+
+</div>
+
+
+</section>
+
+<!-- =========================
+     PROFILE PAGE
+========================= -->
+
+<section
+    class="page"
+    id="page-profile">
+
+<div class="page-header">
+
+    <h1>Profile</h1>
+
+    <p>
+        Your learner details and achievements.
+    </p>
+
+</div>
+
+
+<div
+    class="panel"
+    style="max-width:700px;">
+
+    <div class="profile-top">
+
+        <div
+            class="avatar"
+            id="profile-avatar">
+            A
+        </div>
+
+        <div>
+
+            <p class="profile-name">
+                Alex Morgan
+            </p>
+
+            <p class="profile-sub">
+                Learning since September 2026
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="field-row">
+
+        <span class="field-label">
+            Email
+        </span>
+
+        <span class="field-value">
+            alex.morgan@example.com
+        </span>
+
+    </div>
+
+
+    <div class="field-row">
+
+        <span class="field-label">
+            Favorite category
+        </span>
+
+        <span
+            class="field-value"
+            id="prof-fav">
+            —
+        </span>
+
+    </div>
+
+
+    <div class="field-row">
+
+        <span class="field-label">
+            Best score
+        </span>
+
+        <span
+            class="field-value"
+            id="prof-best">
+            —
+        </span>
+
+    </div>
+
+
+    <div class="field-row">
+
+        <span class="field-label">
+            Quizzes completed
+        </span>
+
+        <span
+            class="field-value"
+            id="prof-count">
+            0
+        </span>
+
+    </div>
+
+
+    <div class="field-row">
+
+        <span class="field-label">
+            Current level
+        </span>
+
+        <span
+            class="field-value"
+            id="prof-level">
+            Level 1
+        </span>
+
+    </div>
+
+
+    <div class="field-row">
+
+        <span class="field-label">
+            Total XP
+        </span>
+
+        <span
+            class="field-value"
+            id="prof-xp">
+            0 XP
+        </span>
+
+    </div>
+
+</div>
+
+
+<!-- LEVEL -->
+
+<div
+    class="panel"
+    style="max-width:700px;">
+
+    <div class="level-header">
+
+        <div>
+
+            <h3>
+                Your Level
+            </h3>
+
+            <p id="level-text">
+                Level 1
+            </p>
+
+        </div>
+
+        <strong id="level-xp">
+            0 / 100 XP
+        </strong>
+
+    </div>
+
+
+    <div class="level-track">
+
+        <div
+            class="level-fill"
+            id="level-fill">
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ACHIEVEMENTS -->
+
+<div
+    class="panel"
+    style="max-width:700px;">
+
+    <h3>
+        Achievements
+    </h3>
+
+    <div
+        class="badges"
+        id="badges">
+    </div>
+
+</div>
+
+</section>
+
+</div>
+
+<script src="quiz.js"></script>
+
+</body>
+</html>
