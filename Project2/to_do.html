@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Tasks</title>
+
+    <link rel="stylesheet" href="to_do.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- HEADER -->
+        <header class="header">
+
+            <div class="header-left">
+
+                <div class="logo">
+                    ✓
+                </div>
+
+                <div>
+                    <h1>My Tasks</h1>
+                    <p>Plan · Focus · Get things done</p>
+                </div>
+
+            </div>
+
+            <div class="header-right">
+
+                <div class="sun">☀</div>
+
+                <div>
+                    <strong id="greeting">
+                        Good morning
+                    </strong>
+
+                    <p id="currentDate"></p>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- PROGRESS -->
+        <section class="progress-section">
+
+            <div class="progress-heading">
+
+                <div>
+                    <h2>
+                        Let's make it
+                        <span>productive!</span>
+                    </h2>
+
+                    <p>Small steps. Big progress.</p>
+                </div>
+
+                <div class="progress-number">
+                    <strong id="progressPercent">0%</strong>
+                    <small>completed</small>
+                </div>
+
+            </div>
+
+            <div class="progress-info">
+
+                <span id="progressText">
+                    0 of 0 completed
+                </span>
+
+                <span id="remainingText">
+                    0 remaining
+                </span>
+
+            </div>
+
+            <div class="progress-bar">
+                <div id="progressFill"></div>
+            </div>
+
+        </section>
+
+
+        <!-- ADD TASK -->
+        <form id="taskForm" class="task-form">
+
+            <div class="task-input-wrapper">
+
+                <span>☷</span>
+
+                <input
+                    type="text"
+                    id="taskInput"
+                    placeholder="Add a new task..."
+                    maxlength="100"
+                    autocomplete="off"
+                    required
+                >
+
+            </div>
+
+            <select id="categoryInput">
+
+                <option value="Personal">Personal</option>
+                <option value="School">School</option>
+                <option value="Work">Work</option>
+                <option value="Shopping">Shopping</option>
+
+            </select>
+
+            <select id="priorityInput">
+
+                <option value="low">Low</option>
+                <option value="medium" selected>Medium</option>
+                <option value="high">High</option>
+
+            </select>
+
+            <input
+                type="date"
+                id="dateInput"
+            >
+
+            <button
+                type="submit"
+                class="add-btn"
+            >
+                <span>+</span>
+                Add
+            </button>
+
+        </form>
+
+
+        <!-- FILTERS -->
+        <div class="toolbar">
+
+            <div class="filters">
+
+                <button
+                    class="filter active"
+                    data-filter="all"
+                >
+                    All <span id="allCount">(0)</span>
+                </button>
+
+                <button
+                    class="filter"
+                    data-filter="active"
+                >
+                    Active <span id="activeCount">(0)</span>
+                </button>
+
+                <button
+                    class="filter"
+                    data-filter="completed"
+                >
+                    Completed <span id="completedCount">(0)</span>
+                </button>
+
+            </div>
+
+            <select id="sortSelect">
+
+                <option value="newest">
+                    Newest first
+                </option>
+
+                <option value="oldest">
+                    Oldest first
+                </option>
+
+                <option value="priority">
+                    Priority
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- TASKS -->
+        <section class="tasks-section">
+
+            <ul id="taskList"></ul>
+
+            <div
+                id="emptyState"
+                class="empty-state"
+            >
+
+                <div class="empty-icon">
+                    ✓
+                </div>
+
+                <h3>No tasks here</h3>
+
+                <p>
+                    Add a task and start making progress.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+        <footer>
+
+            <span id="taskCount">
+                0 tasks
+            </span>
+
+            <button id="clearCompleted">
+                Clear completed
+            </button>
+
+        </footer>
+
+    </div>
+
+
+    <!-- =========================
+         EDIT MODAL
+    ========================== -->
+
+    <div
+        id="editModal"
+        class="modal-overlay"
+    >
+
+        <div class="edit-modal">
+
+            <div class="modal-header">
+
+                <div class="modal-icon">
+                    ✎
+                </div>
+
+                <div>
+                    <h2>Edit task</h2>
+                    <p>Update your task details</p>
+                </div>
+
+                <button
+                    id="closeModal"
+                    class="close-modal"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div class="modal-body">
+
+                <label for="editTaskInput">
+                    Task name
+                </label>
+
+                <input
+                    type="text"
+                    id="editTaskInput"
+                    placeholder="Enter your task..."
+                    maxlength="100"
+                >
+
+
+                <div class="edit-fields">
+
+                    <div>
+
+                        <label for="editCategory">
+                            Category
+                        </label>
+
+                        <select id="editCategory">
+
+                            <option value="Personal">
+                                Personal
+                            </option>
+
+                            <option value="School">
+                                School
+                            </option>
+
+                            <option value="Work">
+                                Work
+                            </option>
+
+                            <option value="Shopping">
+                                Shopping
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div>
+
+                        <label for="editPriority">
+                            Priority
+                        </label>
+
+                        <select id="editPriority">
+
+                            <option value="low">
+                                Low
+                            </option>
+
+                            <option value="medium">
+                                Medium
+                            </option>
+
+                            <option value="high">
+                                High
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <label for="editDate">
+                    Due date
+                </label>
+
+                <input
+                    type="date"
+                    id="editDate"
+                >
+
+            </div>
+
+
+            <div class="modal-footer">
+
+                <button
+                    id="cancelEdit"
+                    class="cancel-btn"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    id="saveEdit"
+                    class="save-btn"
+                >
+                    Save changes
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="to_do.js"></script>
+
+</body>
+
+</html>
