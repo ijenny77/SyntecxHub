@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f2f7fa">
+    <title>Weatherline | Local weather</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="weather.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="weather.js" defer></script>
+</head>
+<body>
+    <main class="weather-app">
+        <header class="topbar">
+            <a class="brand" href="weather.html" aria-label="Weatherline home">
+                <span class="brand-mark" aria-hidden="true"><i data-lucide="cloud-sun"></i></span>
+                <span>weatherline<span class="brand-period">.</span></span>
+            </a>
+            <p class="topbar-note">A little closer to the sky</p>
+        </header>
+
+        <section class="search-section" aria-labelledby="page-title">
+            <div class="intro-copy">
+                <p class="eyebrow">YOUR DAY, IN WEATHER</p>
+                <h1 id="page-title">Look outside.<br><span>Know what’s coming.</span></h1>
+            </div>
+
+            <form class="search-form" id="search-form" role="search">
+                <label class="visually-hidden" for="city-input">Search for a city</label>
+                <i data-lucide="map-pin" aria-hidden="true"></i>
+                <input id="city-input" name="city" type="search" placeholder="Search any city..." autocomplete="off" required>
+                <button class="search-button" type="submit" aria-label="Search weather">
+                    <span>Search</span><i data-lucide="arrow-up-right" aria-hidden="true"></i>
+                </button>
+            </form>
+            <div class="search-tools">
+                <p class="search-hint">Try a city name, like Tokyo or New York</p>
+                <button class="location-button" id="location-button" type="button"><i data-lucide="locate-fixed" aria-hidden="true"></i> Use my location</button>
+            </div>
+        </section>
+
+        <section class="weather-content" aria-label="Current weather">
+            <div class="notice" id="notice" role="status" aria-live="polite" hidden></div>
+            <nav class="favorites" id="favorites" aria-label="Favorite cities" hidden></nav>
+
+            <article class="current-weather" id="current-weather" aria-live="polite" aria-busy="false">
+                <div class="weather-actions">
+                    <span class="weather-kicker"><span class="weather-kicker-dot"></span> RIGHT NOW</span>
+                    <div class="weather-action-buttons">
+                        <button class="icon-button" id="favorite-button" type="button" aria-label="Save city to favorites" title="Save city to favorites" disabled><i data-lucide="star" aria-hidden="true"></i></button>
+                        <button class="icon-button" id="refresh-button" type="button" aria-label="Refresh weather" title="Refresh weather" disabled><i data-lucide="refresh-cw" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+                <div class="weather-main">
+                    <div class="location-block">
+                        <p class="eyebrow" id="local-date">CURRENT CONDITIONS</p>
+                        <h2 id="location-name">Find your forecast</h2>
+                        <p class="condition-copy" id="condition-copy">Your city’s weather, right now.</p>
+                    </div>
+                    <div class="temperature-block">
+                        <img id="weather-icon" class="weather-icon" src="https://openweathermap.org/img/wn/03d@2x.png" alt="" hidden>
+                        <span id="temperature" class="temperature">--<sup>°</sup></span>
+                    </div>
+                </div>
+                <div class="weather-bottom">
+                    <p id="feels-like">Feels like --°</p>
+                    <p id="high-low">High --° <span>·</span> Low --°</p>
+                </div>
+            </article>
+
+            <section class="forecast-section" aria-labelledby="forecast-title">
+                <div class="forecast-heading">
+                    <div>
+                        <p class="eyebrow">THE DAYS AHEAD</p>
+                        <h2 id="forecast-title">5-day outlook</h2>
+                    </div>
+                    <div class="unit-switch" role="group" aria-label="Temperature unit">
+                        <button class="unit-button active" type="button" data-unit="celsius" aria-pressed="true">°C</button>
+                        <button class="unit-button" type="button" data-unit="fahrenheit" aria-pressed="false">°F</button>
+                    </div>
+                </div>
+                <div class="forecast-grid" id="forecast-grid" aria-live="polite">
+                    <p class="forecast-empty">Search a city to see the five-day forecast.</p>
+                </div>
+            </section>
+
+            <div class="details-heading">
+                <div>
+                    <p class="eyebrow">AT A GLANCE</p>
+                    <h2>Today’s details</h2>
+                </div>
+                <span class="live-indicator"><span></span> LIVE</span>
+            </div>
+
+            <div class="details-grid">
+                <article class="detail-item">
+                    <span class="detail-icon humidity-icon"><i data-lucide="droplets" aria-hidden="true"></i></span>
+                    <div><p class="detail-label">Humidity</p><p class="detail-value" id="humidity-value">--<small>%</small></p></div>
+                    <p class="detail-note" id="humidity-note">Moisture in the air</p>
+                </article>
+                <article class="detail-item">
+                    <span class="detail-icon wind-icon"><i data-lucide="wind" aria-hidden="true"></i></span>
+                    <div><p class="detail-label">Wind speed</p><p class="detail-value" id="wind-value">--<small> m/s</small></p></div>
+                    <p class="detail-note">A gentle breeze</p>
+                </article>
+                <article class="detail-item">
+                    <span class="detail-icon sunrise-icon"><i data-lucide="sunrise" aria-hidden="true"></i></span>
+                    <div><p class="detail-label">Sunrise</p><p class="detail-value" id="sunrise-value">--:--</p></div>
+                    <p class="detail-note">A new day begins</p>
+                </article>
+                <article class="detail-item">
+                    <span class="detail-icon sunset-icon"><i data-lucide="sunset" aria-hidden="true"></i></span>
+                    <div><p class="detail-label">Sunset</p><p class="detail-value" id="sunset-value">--:--</p></div>
+                    <p class="detail-note">Golden hour ahead</p>
+                </article>
+            </div>
+
+            <details class="settings">
+                <summary><i data-lucide="settings-2" aria-hidden="true"></i> API key settings</summary>
+                <form class="key-form" id="key-form">
+                    <label for="api-key">OpenWeatherMap API key</label>
+                    <div class="key-entry">
+                        <input id="api-key" name="apiKey" type="password" placeholder="Enter your API key" autocomplete="off" spellcheck="false">
+                        <button type="submit">Save key</button>
+                    </div>
+                    <p>Your key is saved only in this browser and used to request current weather.</p>
+                </form>
+            </details>
+        </section>
+
+        <footer class="page-footer">
+            <span>Weatherline</span>
+            <span>Current conditions powered by OpenWeatherMap</span>
+        </footer>
+    </main>
+</body>
+</html>
